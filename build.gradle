@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:5.2.0"
+    }
+}
+
+apply plugin: "java"
+apply plugin: "com.github.johnrengelman.shadow"
+
+group 'me.matata.matamenu'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+defaultTasks 'buildPlugin'
+task buildPlugin(dependsOn: [clean, shadowJar])
+
+repositories {
+    maven { url "https://maven.aliyun.com/repository/central" }
+    maven { url "http://repo.nukkitx.com/main/" }
+    maven { url "https://repo.nukkitx.com/maven-snapshots" }
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.creeperface.nukkit.placeholderapi:PlaceholderAPI:1.4-SNAPSHOT'
+    compileOnly 'cn.nukkit:nukkit:1.0-SNAPSHOT'
+}
+
+processResources {
+    filter{
+        String line -> line.replaceAll('\\$\\{project.version}', version as String)
+    }
+}
+
+shadowJar {
+    mergeServiceFiles()
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.RSA'
+    relocate 'com.google.gson', 'com.massivecraft.factions.shade.com.google.gson'
+}
