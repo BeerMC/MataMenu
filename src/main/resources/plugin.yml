@@ -1,0 +1,6 @@
+version: ${project.version}
+name: MataMenu
+api: ["1.0.8"]
+author: matata
+description: A multi-functional menu plugin in container and gui for Nukkit.(in production)
+main: me.matata.matamenu.nukkit.NukkitPlugin
