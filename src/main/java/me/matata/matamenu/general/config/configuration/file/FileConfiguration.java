@@ -1,8 +1,8 @@
-package me.matata.matamenu.general.configuration.file;
+package me.matata.matamenu.general.config.configuration.file;
 
-import me.matata.matamenu.general.configuration.Configuration;
-import me.matata.matamenu.general.configuration.InvalidConfigurationException;
-import me.matata.matamenu.general.configuration.MemoryConfiguration;
+import me.matata.matamenu.general.config.configuration.Configuration;
+import me.matata.matamenu.general.config.configuration.InvalidConfigurationException;
+import me.matata.matamenu.general.config.configuration.MemoryConfiguration;
 
 import java.io.BufferedReader;
 import java.io.File;

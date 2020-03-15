@@ -1,4 +1,4 @@
-package me.matata.matamenu.general.configuration.file;
+package me.matata.matamenu.general.config.configuration.file;
 
 /**
  * Various settings for controlling the input and output of a {@link

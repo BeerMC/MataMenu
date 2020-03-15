@@ -1,4 +1,4 @@
-package me.matata.matamenu.general.configuration;
+package me.matata.matamenu.general.config.configuration;
 
 /**
  * Exception thrown when attempting to load an invalid {@link Configuration}.

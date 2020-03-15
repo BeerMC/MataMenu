@@ -25,15 +25,17 @@ defaultTasks 'buildPlugin'
 task buildPlugin(dependsOn: [clean, shadowJar])
 
 repositories {
-    maven { url "https://maven.aliyun.com/repository/central" }
-    maven { url "http://repo.nukkitx.com/main/" }
-    maven { url "https://repo.nukkitx.com/maven-snapshots" }
     mavenCentral()
+    maven { url "https://maven.aliyun.com/repository/central" }
+    maven { url "https://repo.nukkitx.com/main/" }
+    maven { url "https://repo.nukkitx.com/maven-snapshots" }
 }
 
 dependencies {
     compile 'com.creeperface.nukkit.placeholderapi:PlaceholderAPI:1.4-SNAPSHOT'
     compileOnly 'cn.nukkit:nukkit:1.0-SNAPSHOT'
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
 }
 
 processResources {

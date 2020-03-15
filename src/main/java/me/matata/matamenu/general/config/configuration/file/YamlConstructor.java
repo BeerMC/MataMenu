@@ -1,6 +1,6 @@
-package me.matata.matamenu.general.configuration.file;
+package me.matata.matamenu.general.config.configuration.file;
 
-import me.matata.matamenu.general.configuration.serialization.ConfigurationSerialization;
+import me.matata.matamenu.general.config.configuration.serialization.ConfigurationSerialization;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 import org.yaml.snakeyaml.error.YAMLException;
 import org.yaml.snakeyaml.nodes.Node;

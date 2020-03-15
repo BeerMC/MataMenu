@@ -1,14 +1,18 @@
 package me.matata.matamenu.general;
 
+import lombok.Getter;
 import me.matata.matamenu.general.config.Locale;
 import me.matata.matamenu.general.config.Settings;
-import me.matata.matamenu.general.configuration.file.YamlConfiguration;
+import me.matata.matamenu.general.config.configuration.file.YamlConfiguration;
 import me.matata.matamenu.general.objects.IPlugin;
 import me.matata.matamenu.general.objects.ITaskManager;
 import me.matata.matamenu.general.utils.FileUtil;
-import me.matata.matamenu.general.utils.StringMan;
+import me.matata.matamenu.general.utils.StringUtil;
 
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 /**
  * @author matata
@@ -22,25 +26,41 @@ public class MataMenu {
 
     public File translationFile;
 
-    public static String version;
+    @Getter
+    private File jarFile;
+
+    public static final String version = "1.0";
 
     public static MataMenu getInstance(){
         return instance;
     }
 
     public static void log(Object message) {
-        MataMenu.getInstance().impl.log(StringMan.getString(message));
+        MataMenu.getInstance().impl.log(StringUtil.getString(message));
     }
 
     public static void debug(Object message) {
         if(Settings.DEBUG){
-            MataMenu.getInstance().impl.log(StringMan.getString(message));
+            MataMenu.getInstance().impl.log(StringUtil.getString(message));
         }
     }
 
     public MataMenu(IPlugin plugin){
         MataMenu.instance = this;
         this.impl = plugin;
+        try {
+            URL url = MataMenu.class.getProtectionDomain().getCodeSource().getLocation();
+            this.jarFile = new File(
+                    new URL(url.toURI().toString().split("!")[0].replaceAll("jar:file", "file"))
+                            .toURI().getPath());
+        } catch (MalformedURLException | URISyntaxException | SecurityException e) {
+            e.printStackTrace();
+            this.jarFile = new File(this.impl.getFolder().getParentFile(), "MataMenu.jar");
+            if (!this.jarFile.exists()) {
+                this.jarFile = new File(this.impl.getFolder().getParentFile(),
+                        "MataMenu_v" + version + ".jar");
+            }
+        }
         load();
     }
 
@@ -66,35 +86,31 @@ public class MataMenu {
                 MataMenu.log("&cFailed to create the settings.yml, please create it manually.");
             }
             YamlConfiguration settings_config = YamlConfiguration.loadConfiguration(configFile);
-            try (InputStream stream = getClass().getResourceAsStream("/plugin.yml")) {
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(stream))) {
-                    version = br.readLine();
-                    System.out.println("&3Plugin version is " + version);
-                }
-            } catch (IOException throwable) {
-                throwable.printStackTrace();
-            }
             String lastVersionString = settings_config.getString("VERSION");
             if(lastVersionString == null || !lastVersionString.equals(version)){
-                Settings.save(configFile);  //Overwrite
-                Settings.load(configFile);
-            }else{
-                Settings.load(configFile);
-                Settings.save(configFile);
+                Settings.convertOldSettings(configFile);
             }
+            Settings.load(configFile);
+            Settings.save(configFile);
         } catch (IOException ignored) {
             MataMenu.log("&cFailed to save settings.yml");
         }
     }
 
     private void loadLocale(){
+        FileUtil.pullFileFromJar(this.jarFile, "en-US.yml", Settings.Paths.LOCALES);
+        FileUtil.pullFileFromJar(this.jarFile, "zh-CN.yml", Settings.Paths.LOCALES);
         this.translationFile = FileUtil.getFile(this.impl.getFolder(),
-                "locales" + File.separator + Settings.LOCALE
+                Settings.Paths.LOCALES + File.separator + Settings.LOCALE
                         + ".yml");
-        //Locale.load(this.translationFile);
+        Locale.load(this.translationFile);
     }
 
     public void loadMenus(){
+
+    }
+
+    public void unload(){
 
     }
 

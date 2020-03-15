@@ -1,4 +1,4 @@
-package me.matata.matamenu.general.configuration.serialization;
+package me.matata.matamenu.general.config.configuration.serialization;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

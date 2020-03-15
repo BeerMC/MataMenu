@@ -1,8 +1,8 @@
-package me.matata.matamenu.general.configuration.file;
+package me.matata.matamenu.general.config.configuration.file;
 
-import me.matata.matamenu.general.configuration.ConfigurationSection;
-import me.matata.matamenu.general.configuration.serialization.ConfigurationSerializable;
-import me.matata.matamenu.general.configuration.serialization.ConfigurationSerialization;
+import me.matata.matamenu.general.config.configuration.ConfigurationSection;
+import me.matata.matamenu.general.config.configuration.serialization.ConfigurationSerializable;
+import me.matata.matamenu.general.config.configuration.serialization.ConfigurationSerialization;
 import org.yaml.snakeyaml.nodes.Node;
 import org.yaml.snakeyaml.representer.Representer;
 

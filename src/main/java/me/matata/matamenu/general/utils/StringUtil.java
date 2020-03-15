@@ -9,7 +9,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class StringMan {
+/**
+ * @author intellectualsites
+ */
+public class StringUtil {
 
     public static String replaceFromMap(String string, Map<String, String> replacements) {
         StringBuilder sb = new StringBuilder(string);
@@ -227,7 +230,7 @@ public class StringMan {
 
     public static boolean isEqualToAny(String a, String... args) {
         for (String arg : args) {
-            if (StringMan.isEqual(a, arg)) {
+            if (StringUtil.isEqual(a, arg)) {
                 return true;
             }
         }
@@ -236,7 +239,7 @@ public class StringMan {
 
     public static boolean isEqualIgnoreCaseToAny(String a, String... args) {
         for (String arg : args) {
-            if (StringMan.isEqualIgnoreCase(a, arg)) {
+            if (StringUtil.isEqualIgnoreCase(a, arg)) {
                 return true;
             }
         }

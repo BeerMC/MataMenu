@@ -1,9 +1,9 @@
-package me.matata.matamenu.general.configuration.file;
+package me.matata.matamenu.general.config.configuration.file;
 
 import me.matata.matamenu.general.MataMenu;
-import me.matata.matamenu.general.configuration.Configuration;
-import me.matata.matamenu.general.configuration.ConfigurationSection;
-import me.matata.matamenu.general.configuration.InvalidConfigurationException;
+import me.matata.matamenu.general.config.configuration.Configuration;
+import me.matata.matamenu.general.config.configuration.ConfigurationSection;
+import me.matata.matamenu.general.config.configuration.InvalidConfigurationException;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.error.YAMLException;

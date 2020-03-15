@@ -1,4 +1,4 @@
-package me.matata.matamenu.general.configuration;
+package me.matata.matamenu.general.config.configuration;
 
 import java.util.List;
 import java.util.Map;

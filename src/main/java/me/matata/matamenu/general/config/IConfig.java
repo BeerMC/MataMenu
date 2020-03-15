@@ -1,9 +1,9 @@
 package me.matata.matamenu.general.config;
 
 import me.matata.matamenu.general.MataMenu;
-import me.matata.matamenu.general.configuration.MemorySection;
-import me.matata.matamenu.general.configuration.file.YamlConfiguration;
-import me.matata.matamenu.general.utils.StringMan;
+import me.matata.matamenu.general.config.configuration.MemorySection;
+import me.matata.matamenu.general.config.configuration.file.YamlConfiguration;
+import me.matata.matamenu.general.utils.StringUtil;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -165,7 +165,7 @@ public class IConfig {
     private static void save(PrintWriter writer, Class clazz, Object instance, int indent) {
         try {
             String lineSeparator = System.lineSeparator();
-            String spacing = StringMan.repeat(" ", indent);
+            String spacing = StringUtil.repeat(" ", indent);
             for (Field field : clazz.getFields()) {
                 if (field.getAnnotation(Ignore.class) != null) {
                     continue;
@@ -183,7 +183,7 @@ public class IConfig {
                         setAccessible(field);
                         Class<?>[] classes = clazz.getDeclaredClasses();
                         for (Class current : classes) {
-                            if (StringMan.isEqual(current.getSimpleName(), field.getName())) {
+                            if (StringUtil.isEqual(current.getSimpleName(), field.getName())) {
                                 field.set(instance, current.newInstance());
                                 break;
                             }
@@ -268,7 +268,7 @@ public class IConfig {
             return field;
         } catch (Throwable e) {
             MataMenu.debug(
-                    "Invalid config field: " + StringMan.join(split, ".") + " for " + toNodeName(
+                    "Invalid config field: " + StringUtil.join(split, ".") + " for " + toNodeName(
                             instance.getClass().getSimpleName()));
             return null;
         }

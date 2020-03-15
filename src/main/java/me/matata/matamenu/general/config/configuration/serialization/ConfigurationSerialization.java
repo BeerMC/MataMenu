@@ -1,6 +1,6 @@
-package me.matata.matamenu.general.configuration.serialization;
+package me.matata.matamenu.general.config.configuration.serialization;
 
-import me.matata.matamenu.general.configuration.Configuration;
+import me.matata.matamenu.general.config.configuration.Configuration;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
