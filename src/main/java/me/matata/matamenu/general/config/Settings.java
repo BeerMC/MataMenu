@@ -8,7 +8,7 @@ import java.io.File;
  * @author matata
  * @date 2020/3/14 11:27
  */
-public class Settings extends IConfig{
+public class Settings extends Config {
 
 
     @Comment("Unconfigurable")

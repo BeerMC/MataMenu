@@ -29,10 +29,12 @@ repositories {
     maven { url "https://maven.aliyun.com/repository/central" }
     maven { url "https://repo.nukkitx.com/main/" }
     maven { url "https://repo.nukkitx.com/maven-snapshots" }
+    maven { url "https://mvnrepository.com/artifact/org.apache.commons/commons-lang3"}
 }
 
 dependencies {
     compile 'com.creeperface.nukkit.placeholderapi:PlaceholderAPI:1.4-SNAPSHOT'
+    compile 'org.apache.commons:commons-lang3:3.9'
     compileOnly 'cn.nukkit:nukkit:1.0-SNAPSHOT'
     compileOnly 'org.projectlombok:lombok:1.18.8'
     annotationProcessor 'org.projectlombok:lombok:1.18.8'

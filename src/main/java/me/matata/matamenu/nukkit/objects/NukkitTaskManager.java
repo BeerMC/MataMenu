@@ -45,7 +45,7 @@ public class NukkitTaskManager extends ITaskManager {
     }
 
     @Override
-    public void taskLater(Runnable r, int delay) {
+    public void taskDelay(Runnable r, int delay) {
         if (r == null) {
             return;
         }
@@ -53,7 +53,7 @@ public class NukkitTaskManager extends ITaskManager {
     }
 
     @Override
-    public void taskLaterAsync(Runnable r, int delay) {
+    public void taskDelayAsync(Runnable r, int delay) {
         this.plugin.getServer().getScheduler().scheduleDelayedTask(r, delay, true);
     }
 

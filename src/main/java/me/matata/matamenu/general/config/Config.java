@@ -3,7 +3,7 @@ package me.matata.matamenu.general.config;
 import me.matata.matamenu.general.MataMenu;
 import me.matata.matamenu.general.config.configuration.MemorySection;
 import me.matata.matamenu.general.config.configuration.file.YamlConfiguration;
-import me.matata.matamenu.general.utils.StringUtil;
+import me.matata.matamenu.general.utils.Strings;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -22,7 +22,8 @@ import java.util.Map;
 /**
  * @author intellectualsites
  */
-public class IConfig {
+@SuppressWarnings("unchecked")
+public class Config {
 
     /**
      * Get the value for a node<br>
@@ -165,7 +166,7 @@ public class IConfig {
     private static void save(PrintWriter writer, Class clazz, Object instance, int indent) {
         try {
             String lineSeparator = System.lineSeparator();
-            String spacing = StringUtil.repeat(" ", indent);
+            String spacing = Strings.repeat(" ", indent);
             for (Field field : clazz.getFields()) {
                 if (field.getAnnotation(Ignore.class) != null) {
                     continue;
@@ -183,7 +184,7 @@ public class IConfig {
                         setAccessible(field);
                         Class<?>[] classes = clazz.getDeclaredClasses();
                         for (Class current : classes) {
-                            if (StringUtil.isEqual(current.getSimpleName(), field.getName())) {
+                            if (Strings.isEqual(current.getSimpleName(), field.getName())) {
                                 field.set(instance, current.newInstance());
                                 break;
                             }
@@ -268,7 +269,7 @@ public class IConfig {
             return field;
         } catch (Throwable e) {
             MataMenu.debug(
-                    "Invalid config field: " + StringUtil.join(split, ".") + " for " + toNodeName(
+                    "Invalid config field: " + Strings.join(split, ".") + " for " + toNodeName(
                             instance.getClass().getSimpleName()));
             return null;
         }

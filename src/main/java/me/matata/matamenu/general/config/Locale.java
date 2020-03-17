@@ -3,7 +3,7 @@ package me.matata.matamenu.general.config;
 import me.matata.matamenu.general.MataMenu;
 import me.matata.matamenu.general.config.configuration.file.YamlConfiguration;
 import me.matata.matamenu.general.objects.ICommandSender;
-import me.matata.matamenu.general.utils.StringUtil;
+import me.matata.matamenu.general.utils.Strings;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,7 +54,7 @@ public enum Locale {
                 map.put("%s", arg);
             }
         }
-        message = StringUtil.replaceFromMap(message, map);
+        message = Strings.replaceFromMap(message, map);
         return message;
     }
 
@@ -135,7 +135,7 @@ public enum Locale {
                             item.defaultString);
                 }
                 item.translatedString =
-                        StringUtil.replaceFromMap(item.translatedString, replacements);
+                        Strings.replaceFromMap(item.translatedString, replacements);
             }
             if (changed) {
                 yml.save(file);
@@ -146,7 +146,7 @@ public enum Locale {
     }
 
     public static String color(String string) {
-        return StringUtil.replaceFromMap(string, replacements);
+        return Strings.replaceFromMap(string, replacements);
     }
 
     @Override public String toString() {
@@ -162,7 +162,7 @@ public enum Locale {
     }
 
     public String formatted() {
-        return StringUtil.replaceFromMap(getTranslated(), replacements);
+        return Strings.replaceFromMap(getTranslated(), replacements);
     }
 
     public String getCategory() {

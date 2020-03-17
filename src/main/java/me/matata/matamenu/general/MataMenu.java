@@ -7,7 +7,7 @@ import me.matata.matamenu.general.config.configuration.file.YamlConfiguration;
 import me.matata.matamenu.general.objects.IPlugin;
 import me.matata.matamenu.general.objects.ITaskManager;
 import me.matata.matamenu.general.utils.FileUtil;
-import me.matata.matamenu.general.utils.StringUtil;
+import me.matata.matamenu.general.utils.Strings;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -18,11 +18,11 @@ import java.net.URL;
  * @author matata
  * @date 2020/3/13 15:34
  */
-public class MataMenu {
+public class MataMenu{
 
     private static MataMenu instance;
 
-    public final IPlugin impl;
+    public final IPlugin<?> impl;
 
     public File translationFile;
 
@@ -31,21 +31,25 @@ public class MataMenu {
 
     public static final String version = "1.0";
 
+
     public static MataMenu getInstance(){
         return instance;
     }
 
+
     public static void log(Object message) {
-        MataMenu.getInstance().impl.log(StringUtil.getString(message));
+        MataMenu.getInstance().impl.log(Strings.getString(message));
     }
+
 
     public static void debug(Object message) {
         if(Settings.DEBUG){
-            MataMenu.getInstance().impl.log(StringUtil.getString(message));
+            MataMenu.getInstance().impl.log(Strings.getString(message));
         }
     }
 
-    public MataMenu(IPlugin plugin){
+
+    public MataMenu(IPlugin<?> plugin){
         MataMenu.instance = this;
         this.impl = plugin;
         try {
@@ -64,6 +68,7 @@ public class MataMenu {
         load();
     }
 
+
     public void load(){
         loadTaskManager();
         loadSettings();
@@ -71,9 +76,11 @@ public class MataMenu {
         loadMenus();
     }
 
+
     public void loadTaskManager(){
         ITaskManager.impl = impl.getTaskManager();
     }
+
 
     private void loadSettings() {
         File folder = new File(this.impl.getFolder(), "config");
@@ -97,6 +104,7 @@ public class MataMenu {
         }
     }
 
+
     private void loadLocale(){
         FileUtil.pullFileFromJar(this.jarFile, "en-US.yml", Settings.Paths.LOCALES);
         FileUtil.pullFileFromJar(this.jarFile, "zh-CN.yml", Settings.Paths.LOCALES);
@@ -106,9 +114,11 @@ public class MataMenu {
         Locale.load(this.translationFile);
     }
 
+
     public void loadMenus(){
 
     }
+
 
     public void unload(){
 

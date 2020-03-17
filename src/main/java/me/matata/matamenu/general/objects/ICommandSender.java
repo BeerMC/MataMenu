@@ -6,18 +6,13 @@ package me.matata.matamenu.general.objects;
  */
 public interface ICommandSender {
 
-    /**
-     * Send the player a message.
-     *
-     * @param message the message to send
-     */
+
     void sendMessage(String message);
 
-    /**
-     * Check the player's permissions.
-     *
-     * @param permission the name of the permission
-     */
+
     boolean hasPermission(String permission);
+
+
+    String getName();
 
 }
